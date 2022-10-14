@@ -1,5 +1,18 @@
-# x-forwarded-for
-X-Forwarded-For Header Browser Extension
+# enhance-x-forwarded-for
 
-## Get it
-[Chrome](https://chrome.google.com/webstore/detail/x-forwarded-for-header/hkghghbnihliadkabmlcmcgmffllglin) or [Firefox](https://addons.mozilla.org/firefox/addon/x-forwarded-for-injector/)
+[X-Forwarded-For](https://github.com/MisterPhilip/x-forwarded-for) change edition
+
+<img src="https://dd-static.jd.com/ddimg/jfs/t1/156838/21/31291/109848/63491c62Ec7a69970/25171bc836b264a4.png" referrerPolicy="no-referrer" />
+
+### Download
+
+Download from [releases](https://github.com/Kuibagit/enhance-x-forwarded-for/releases)
+
+### Local Build
+
+```bash
+git clone https://github.com/Kuibagit/enhance-x-forwarded-for.git
+cd enhance-x-forwarded-for
+npm install
+.\node_modules\.bin\grunt build-extensions
+```

@@ -156,9 +156,17 @@
         <p>Send the following headers:</p>
         <ul id="header-settings">
             <li><label for="x-forwarded-for"><input type="checkbox" name="headers[]" value="X-Forwarded-For" id="x-forwarded-for">X-Forwarded-For</label></li>
+            <li><label for="x-forwarded-host"><input type="checkbox" name="headers[]" value="X-Forwarded-Host" id="x-forwarded-host">X-Forwarded-Host</label></li>
             <li><label for="x-originating-ip"><input type="checkbox" name="headers[]" value="X-Originating-IP" id="x-originating-ip">X-Originating-IP</label></li>
+            <li><label for="x-client-ip"><input type="checkbox" name="headers[]" value="X-Client-IP" id="x-client-ip">X-Client-IP</label></li>
             <li><label for="x-remote-ip"><input type="checkbox" name="headers[]" value="X-Remote-IP" id="x-remote-ip">X-Remote-IP</label></li>
             <li><label for="x-remote-addr"><input type="checkbox" name="headers[]" value="X-Remote-Addr" id="x-remote-addr">X-Remote-Addr</label></li>
+            <li><label for="x-real-ip"><input type="checkbox" name="headers[]" value="X-Real-IP" id="x-real-ip">X-Real-IP</label></li>
+            <li><label for="client-ip"><input type="checkbox" name="headers[]" value="Client-IP" id="client-ip">Client-IP</label></li>
+            <li><label for="source-ip"><input type="checkbox" name="headers[]" value="Source-IP" id="source-ip">Source-IP</label></li>
+            <li><label for="true-client-ip"><input type="checkbox" name="headers[]" value="True-Client-IP" id="true-client-ip">True-Client-IP</label></li>
+            <li><label for="proxy-client-ip"><input type="checkbox" name="headers[]" value="Proxy-Client-IP" id="proxy-client-ip">Proxy-Client-IP*</label></li>
+            <li><label for="wl-proxy-client-ip"><input type="checkbox" name="headers[]" value="WL-Proxy-Client-IP" id="wl-proxy-client-ip">WL-Proxy-Client-IP*</label></li>
         </ul>
     </form>
     <script src="options.js"></script>

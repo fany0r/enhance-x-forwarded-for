@@ -2,21 +2,21 @@ module.exports = function (grunt) {
 
     grunt.config.init({
         "chrome": {
-            "name": "X-Forwarded-For Header",
-            "version": "0.6.2",
+            "name": "Enhance-X-Forwarded-For-Header",
+            "version": "0.6.3",
             "usePolyfill": true,
             "folder": "chromium"
         },
         "firefox": {
-            "name": "X-Forwarded-For Header",
-            "version": "0.6.2",
-            "gecko": "{9e00ccd0-bf33-4038-929d-833a4b8d723b}",
+            "name": "Enhance-X-Forwarded-For-Header",
+            "version": "0.6.3",
+            "gecko": "{9e00ccd0-bf33-4038-929d-833a4b666666}",
             "usePolyfill": false,
             "folder": "firefox"
         },
         "clean": {
-            "chrome": ["platform/chromium", "build/chome_*.zip"],
-            "firefox": ["platform/firefox"],
+            "chrome": ["platform/chromium", "build/chrome_*.zip"],
+            "firefox": ["platform/firefox", "build/firefox_*.zip"],
         },
         "watch": {
             "chrome": {
