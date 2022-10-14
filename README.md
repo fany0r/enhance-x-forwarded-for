@@ -2,7 +2,7 @@
 
 [X-Forwarded-For](https://github.com/MisterPhilip/x-forwarded-for) change edition
 
-<img src="https://dd-static.jd.com/ddimg/jfs/t1/156838/21/31291/109848/63491c62Ec7a69970/25171bc836b264a4.png" referrerPolicy="no-referrer" />
+![](https://dd-static.jd.com/ddimg/jfs/t1/156838/21/31291/109848/63491c62Ec7a69970/25171bc836b264a4.png)
 
 ### Download
 
