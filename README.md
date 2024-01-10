@@ -11,7 +11,7 @@ Download from [releases](https://github.com/Kuibagit/enhance-x-forwarded-for/rel
 ### Local Build
 
 ```bash
-git clone https://github.com/Kuibagit/enhance-x-forwarded-for.git
+git clone https://github.com/fany0r/enhance-x-forwarded-for.git
 cd enhance-x-forwarded-for
 npm install
 .\node_modules\.bin\grunt build-extensions
