@@ -1,0 +1,38 @@
+name: Build Browser Extension
+
+on:
+  # push:
+  #   branches:
+  #     - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '12'
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build Browser Extension
+      run: npm run grunt build-extensions
+
+    - name: Upload Artifact Firefox
+      uses: actions/upload-artifact@v3
+      with:
+        name: firefox-enhance-x-forwarded-for
+        path: ${{ github.workspace }}/build/firefox*.zip
+    
+    - name: Upload Artifact Chrome
+      uses: actions/upload-artifact@v3
+      with:
+        name: chrome-enhance-x-forwarded-for
+        path: ${{ github.workspace }}/build/chrome*.zip
