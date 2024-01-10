@@ -6,7 +6,7 @@
 
 ### Download
 
-Download from [releases](https://github.com/Kuibagit/enhance-x-forwarded-for/releases)
+Download from [releases](https://github.com/fany0r/enhance-x-forwarded-for/releases)
 
 ### Local Build
 
