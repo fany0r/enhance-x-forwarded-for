@@ -24,7 +24,7 @@ jobs:
 
     - name: Build Browser Extension
       run: |
-        npm install grunt --save-dev
+        npm install grunt@1.5.3 --save-dev
         npm run grunt build-extensions
 
     - name: Upload Artifact Firefox
