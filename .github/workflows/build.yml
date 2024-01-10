@@ -23,7 +23,7 @@ jobs:
       run: npm install
 
     - name: Build Browser Extension
-      run: npm run grunt build-extensions
+      run: ./node_modules/grunt build-extensions
 
     - name: Upload Artifact Firefox
       uses: actions/upload-artifact@v3
