@@ -5,7 +5,7 @@
             headers: ['X-Forwarded-For']
         },
         settings = Object.assign({}, defaultSettings),
-        allowedHeaders = ['X-Forwarded-For', 'X-Forwarded-Host', 'X-Originating-IP', 'X-Client-IP', 'X-Remote-IP', 'X-Remote-Addr', 'X-Real-IP', 'Client-IP', 'Source-IP', 'True-Client-IP', 'Proxy-Client-IP', 'WL-Proxy-Client-IP'],
+        allowedHeaders = ['X-Forwarded', 'X-Forwarded-For', 'X-Forwarded-Host', 'X-Originating-IP', 'X-Client-IP', 'X-Remote-IP', 'X-Remote-Addr', 'X-Real-IP', 'Client-IP', 'Source-IP', 'Forwarded-For', 'Forwarded','True-Client-IP', 'Ali-Cdn-Real-Ip', 'Cdn-Real-Ip', 'Cdn-Src-Ip', 'CF-Connecting-IP', 'X-Cluster-Client-IP','Proxy-Client-IP', 'WL-Proxy-Client-IP'],
         timeout = null,
         el = {
             'ip': document.getElementById('ip'),

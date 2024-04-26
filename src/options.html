@@ -122,6 +122,8 @@
             padding: 0;
             margin: 0;
             list-style: none;
+            height: 238px;
+            overflow-y: scroll;
         }
 
         #header-settings li {
@@ -155,6 +157,7 @@
         <ul id="prev"></ul>
         <p>Send the following headers:</p>
         <ul id="header-settings">
+            <li><label for="x-forwarded"><input type="checkbox" name="headers[]" value="X-Forwarded" id="x-forwarded">X-Forwarded</label></li>
             <li><label for="x-forwarded-for"><input type="checkbox" name="headers[]" value="X-Forwarded-For" id="x-forwarded-for">X-Forwarded-For</label></li>
             <li><label for="x-forwarded-host"><input type="checkbox" name="headers[]" value="X-Forwarded-Host" id="x-forwarded-host">X-Forwarded-Host</label></li>
             <li><label for="x-originating-ip"><input type="checkbox" name="headers[]" value="X-Originating-IP" id="x-originating-ip">X-Originating-IP</label></li>
@@ -164,7 +167,14 @@
             <li><label for="x-real-ip"><input type="checkbox" name="headers[]" value="X-Real-IP" id="x-real-ip">X-Real-IP</label></li>
             <li><label for="client-ip"><input type="checkbox" name="headers[]" value="Client-IP" id="client-ip">Client-IP</label></li>
             <li><label for="source-ip"><input type="checkbox" name="headers[]" value="Source-IP" id="source-ip">Source-IP</label></li>
+            <li><label for="forwarded-for"><input type="checkbox" name="headers[]" value="Forwarded-For" id="forwarded-for">Forwarded-For</label></li>
+            <li><label for="forwarded"><input type="checkbox" name="headers[]" value="Forwarded" id="forwarded">Forwarded</label></li>
             <li><label for="true-client-ip"><input type="checkbox" name="headers[]" value="True-Client-IP" id="true-client-ip">True-Client-IP</label></li>
+            <li><label for="ali-cdn-real-ip"><input type="checkbox" name="headers[]" value="Ali-Cdn-Real-Ip" id="Ali-Cdn-Real-Ip">Ali-Cdn-Real-Ip</label></li>
+            <li><label for="cdn-src-ip"><input type="checkbox" name="headers[]" value="Cdn-Src-Ip" id="cdn-src-ip">Cdn-Src-Ip</label></li>
+            <li><label for="cdn-real-ip"><input type="checkbox" name="headers[]" value="Cdn-Real-Ip" id="cdn-real-ip">Cdn-Real-Ip</label></li>
+            <li><label for="cf-connecting-ip"><input type="checkbox" name="headers[]" value="CF-Connecting-IP" id="cf-Connecting-ip">CF-Connecting-IP</label></li>
+            <li><label for="x-cluster-Client-ip"><input type="checkbox" name="headers[]" value="X-Cluster-Client-IP" id="x-Cluster-client-ip">X-Cluster-Client-IP</label></li>
             <li><label for="proxy-client-ip"><input type="checkbox" name="headers[]" value="Proxy-Client-IP" id="proxy-client-ip">Proxy-Client-IP*</label></li>
             <li><label for="wl-proxy-client-ip"><input type="checkbox" name="headers[]" value="WL-Proxy-Client-IP" id="wl-proxy-client-ip">WL-Proxy-Client-IP*</label></li>
         </ul>

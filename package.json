@@ -1,6 +1,6 @@
 {
   "name": "x-forwarded-for-browser-plugin",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "X-Forwarded-For Browser Plugin",
   "devDependencies": {
     "grunt": "^1.5.3",
@@ -16,14 +16,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MisterPhilip/x-forwarded-for.git"
+    "url": "git+https://github.com/fany0r/enhance-x-forwarded-for.git"
   },
-  "author": "Philip Lawrence",
+  "author": "Philip Lawrence,Change by SecAdmin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MisterPhilip/x-forwarded-for/issues"
+    "url": "https://github.com/fany0r/enhance-x-forwarded-for/issues"
   },
-  "homepage": "https://github.com/MisterPhilip/x-forwarded-for#readme",
+  "homepage": "https://github.com/fany0r/enhance-x-forwarded-for#readme",
   "dependencies": {
     "grunt-text-replace": "^0.4.0"
   }

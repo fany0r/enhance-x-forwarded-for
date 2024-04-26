@@ -3,7 +3,7 @@ module.exports = function (grunt) {
     grunt.config.init({
         "chrome": {
             "name": "Enhance-X-Forwarded-For-Header",
-            "version": "0.6.3",
+            "version": "0.6.4",
             "usePolyfill": true,
             "folder": "chromium"
         },
