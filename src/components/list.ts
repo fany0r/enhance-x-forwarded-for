@@ -138,7 +138,7 @@ export class ListProfilesElement extends LitElement {
         return html`
             <header>
                 <h1>X-Forwarded-For Header Profiles</h1>
-                <p>Profiles allow you to use different values for different headers and/or domains. If multiple enabled profiles match a domain with the same header(s), the last profile will take precedence.</p>
+                <p>${chrome.i18n.getMessage("info_profile_functionality")}</p>
                 ${!this._enabled ?
                     html`<p class="disabled">${chrome.i18n.getMessage("profile_extension_disabled")} <button @click=${this._enableExtension}>${chrome.i18n.getMessage("btn_enable_extension")}</button></p>` :
                     nothing
@@ -150,7 +150,7 @@ export class ListProfilesElement extends LitElement {
                 @moveProfile=${this._moveProfile}
             >
                 ${sortedProfiles.length ? html`<section class="add"><ext-button @click=${this._toggleModal} class="btn-outline btn-success">${chrome.i18n.getMessage("btn_add_profile")}</ext-button></section>` : nothing}
-                
+
                 ${sortedProfiles.map((profile, index) => html`<profile-entry .profile=${profile} .index=${index} .totalProfiles=${sortedProfiles.length}></profile-entry>`)}
 
                 <section class="add">
@@ -168,17 +168,13 @@ export class ListProfilesElement extends LitElement {
                         </div>
                     </div>
                 ` : nothing}
-                
+
                 ${this._showProfileForm ? html`<profile-form @closeModal=${this._toggleModal}></profile-form>` : nothing }
             </main>
             <p>
-                This extension does not force an IP address format; passing an invalid IP address or multiple IP addresses when the server is not expecting it may cause issues and your request might be rejected.
-            </p>
-            <p>
-                This extension has recently been updated and is not 100% complete.
-                Additional features and visual tweaks will be coming in the near future.
-                Any bugs found can be reported at <a href="https://github.com/MisterPhilip/x-forwarded-for/issues">https://github.com/MisterPhilip/x-forwarded-for/issues</a>.
-                Please include the debug information below to help with the issue.
+            ${chrome.i18n.getMessage("info_ip_format_warning")} <br>
+            ${chrome.i18n.getMessage("info_bug_report_link")} <a href="https://github.com/fany0r/enhance-x-forwarded-for/issues">https://github.com/fany0r/enhance-x-forwarded-for/issues</a>.<br>
+            ${chrome.i18n.getMessage("info_debug_info_usage")}
             </p>
             <section class="add">
                 <ext-button @click=${this._toggleDebug} class="btn-outline">${chrome.i18n.getMessage("btn_copy_debug")}</ext-button>

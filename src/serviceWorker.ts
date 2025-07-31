@@ -8,6 +8,7 @@ interface Profile {
     domains: string[];
     includeDomains: boolean;
     enabled: boolean;
+    randomIp?: boolean;
 }
 
 interface LegacyV0Settings {
@@ -16,7 +17,13 @@ interface LegacyV0Settings {
     headers: string[],
 }
 
+const generateRandomIP = (): string => {
+    const octet = () => Math.floor(Math.random() * 256);
+    return `${octet()}.${octet()}.${octet()}.${octet()}`;
+};
+
 const convertProfileToRule = (profile: Profile): chrome.declarativeNetRequest.Rule => {
+    const ipValue = profile.randomIp ? generateRandomIP() : profile.value;
     const rule: chrome.declarativeNetRequest.Rule = {
         id: profile.id,
         priority: profile.id,
@@ -26,7 +33,7 @@ const convertProfileToRule = (profile: Profile): chrome.declarativeNetRequest.Ru
                 return {
                     header: header.toLowerCase(),
                     operation: chrome.declarativeNetRequest.HeaderOperation.SET,
-                    value: profile.value,
+                    value: ipValue,
                 }
             }),
         },
@@ -62,6 +69,32 @@ const convertProfileToRule = (profile: Profile): chrome.declarativeNetRequest.Ru
     return rule;
 }
 
+let globalRandomIpTimer: NodeJS.Timeout | null = null;
+
+const startGlobalRandomIpTimer = () => {
+    if (globalRandomIpTimer) {
+        clearInterval(globalRandomIpTimer);
+    }
+
+    globalRandomIpTimer = setInterval(async () => {
+        // Check if there is a configuration file that enables random IP
+        const storedSettings = await chrome.storage.sync.get(["enabled", "profiles"]) as { enabled?: boolean, profiles?: Profile[] };
+        if (storedSettings?.enabled && storedSettings?.profiles) {
+            const hasRandomIpProfiles = storedSettings.profiles.some(p => p.enabled && p.randomIp);
+            if (hasRandomIpProfiles) {
+                await updateFromSettings();
+            }
+        }
+    }, 30000);
+};
+
+const stopGlobalRandomIpTimer = () => {
+    if (globalRandomIpTimer) {
+        clearInterval(globalRandomIpTimer);
+        globalRandomIpTimer = null;
+    }
+};
+
 const updateDeclarativeRules = ({ addRules = [], removeRules = [] }: { addRules?: chrome.declarativeNetRequest.Rule[], removeRules?: chrome.declarativeNetRequest.Rule[] }) => {
     const removeRuleIds = removeRules.map(rule => rule.id);
     chrome.declarativeNetRequest.updateDynamicRules({
@@ -82,6 +115,8 @@ const updateFromSettings = async () => {
     const oldRules = await chrome.declarativeNetRequest.getDynamicRules();
     let enabled: boolean;
 
+    stopGlobalRandomIpTimer();
+
     if(!storedSettings || !storedSettings.enabled || !storedSettings.profiles) {
         if(oldRules.length) {
             updateDeclarativeRules({ removeRules: oldRules });
@@ -95,6 +130,12 @@ const updateFromSettings = async () => {
 
         updateDeclarativeRules({addRules: rules, removeRules: oldRules});
         enabled = true;
+
+        // Check if a random IP timer needs to be started 
+        const hasRandomIpProfiles = storedSettings.profiles.some(p => p.enabled && p.randomIp);
+        if (hasRandomIpProfiles) {
+            startGlobalRandomIpTimer();
+        }
     }
     await updateIcon(enabled);
 };
@@ -167,6 +208,10 @@ chrome.runtime.onInstalled.addListener(async ({ reason, previousVersion }) => {
 
 // Update the icon status based on what DNR rules are enabled on browser startup
 chrome.runtime.onStartup.addListener(updateIcon);
+
+chrome.runtime.onSuspend.addListener(() => {
+    stopGlobalRandomIpTimer();
+});
 
 // Update the icon & DNR rules when storage has changed
 chrome.storage.sync.onChanged.addListener(updateFromSettings);

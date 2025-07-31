@@ -1,0 +1,176 @@
+{
+  "action_profiles_enabled_count": {
+    "message": "共 $total$ 个配置, 其中 $active$ 个已激活。",
+    "placeholders": {
+      "active": {
+        "content": "$1",
+        "example": "1"
+      },
+      "total": {
+        "content": "$2",
+        "example": "5"
+      }
+    }
+  },
+  "action_profiles_extension_disabled": {
+    "message": "扩展已禁用，请求头将不会更新。点击上方按钮重新启用扩展。"
+  },
+  "all_domains": {
+    "message": "所有域名"
+  },
+  "btn_add_profile": {
+    "message": "添加新配置文件"
+  },
+  "btn_enable": {
+    "message": "启用"
+  },
+  "btn_enable_extension": {
+    "message": "启用扩展"
+  },
+  "btn_edit": {
+    "message": "编辑"
+  },
+  "btn_delete": {
+    "message": "删除"
+  },
+  "btn_disable": {
+    "message": "禁用"
+  },
+  "btn_disable_extension": {
+    "message": "禁用扩展"
+  },
+  "btn_edit_profiles": {
+    "message": "编辑配置文件"
+  },
+  "btn_save": {
+    "message": "保存"
+  },
+  "btn_up": {
+    "message": "上移"
+  },
+  "btn_down": {
+    "message": "下移"
+  },
+  "btn_copy_debug": {
+    "message": "复制调试信息"
+  },
+  "error_domains_required": {
+    "message": "至少需要指定一个域名"
+  },
+  "error_name_required": {
+    "message": "配置文件名称必填"
+  },
+  "error_value_required": {
+    "message": "IP 地址必填"
+  },
+  "error_headers_required": {
+    "message": "至少需要指定一个请求头"
+  },
+  "form_name_help": {
+    "message": "为配置文件命名，方便与其他配置文件区分。"
+  },
+  "form_name_label": {
+    "message": "配置文件名称"
+  },
+  "form_name_placeholder": {
+    "message": "配置1"
+  },
+  "form_value_label": {
+    "message": "IP 地址（多个）"
+  },
+  "form_value_help": {
+    "message": "多个 IP 地址可用空格分隔。"
+  },
+  "form_headers_label": {
+    "message": "请求头"
+  },
+  "form_headers_help": {
+    "message": "选择一个或多个请求头进行更新。"
+  },
+  "form_domains_help": {
+    "message": "提供以空格或逗号分隔的域名列表, 用于包含或排除操作。域名会匹配所有子域名(例如:\"github.com\" 会匹配 \"www.github.com\" 和 \"example.github.com\"）。注意，这些是请求域名，可能与浏览器地址栏显示的 URL 不同。"
+  },
+  "form_domains_label": {
+    "message": "域名"
+  },
+  "form_domains_value_all": {
+    "message": "所有域名"
+  },
+  "form_domains_value_some": {
+    "message": "部分域名"
+  },
+  "form_domains_value_include": {
+    "message": "包含"
+  },
+  "form_domains_value_exclude": {
+    "message": "排除"
+  },
+  "info_profile_functionality": {
+    "message": "这里的配置文件允许你为不同的请求头或域名使用不同的值。如果多个已启用的配置文件匹配同一域名和相同的请求头，最后一个配置文件将优先生效。"
+  },
+  "info_ip_format_warning": {
+    "message": "此扩展不会强制检验IP地址格式, 如果在服务器不期望的情况下传递了无效的IP地址或多个IP地址可能会导致问题, 从而导致请求可能会被拒绝。"
+  },
+  "info_extension_status": {
+    "message": "此扩展最近已更新，尚未开发完成, 其他功能和视觉调整将在不久的将来推出。"
+  },
+  "info_bug_report_link": {
+    "message": "  发现的任何错误都可以提交问题: "
+  },
+  "info_debug_info_usage": {
+    "message": " 提交问题时请复制调试信息以便开发人员调试使用。"
+  },
+  "ext_name": {
+    "message": "X-Forwarded-For"
+  },
+  "form_random_ip_help": {  
+    "message": "每 30 秒将自动生成随机 IP 地址。"  
+  },  
+  "profile_random_ip_display": {  
+    "message": "随机 IP"  
+  },
+  "profile_set_headers": {
+    "message": "设置请求头"
+  },
+  "profile_to_value": {
+    "message": "设置为以下值"
+  },
+  "profile_for_all_domains": {
+    "message": "对所有域名生效"
+  },
+  "profile_for_domains_included": {
+    "message": "对以下域名生效"
+  },
+  "profile_for_domains_excluded": {
+    "message": "对除以下域名外的所有域名生效"
+  },
+  "profile_page_title": {
+    "message": "编辑 X-Forwarded-For 扩展的配置文件"
+  },
+  "profile_extension_disabled": {
+    "message": "扩展已禁用，请求头将不会更新。"
+  },
+  "status_enabled": {
+    "message": "已启用"
+  },
+  "status_disabled": {
+    "message": "已禁用"
+  },
+  "confirm_delete_message": {
+      "message": "确定要删除 [$name$] 配置文件吗？",
+      "placeholders": {
+          "name": {
+              "content": "$1"
+          }
+      }
+  },
+  "btn_yes": {
+      "message": "是"
+  },
+  "btn_cancel": {
+      "message": "否"
+  },
+  "btn_cancel_2": {
+      "message": "取消"
+  }
+}

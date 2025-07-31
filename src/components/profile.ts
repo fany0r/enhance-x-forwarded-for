@@ -115,7 +115,7 @@ export class ProfileElement extends LitElement {
                         ${this.profile.headers.map((header) => html`<li>${header}</li>`)}
                     </ul>
                     <h3>${chrome.i18n.getMessage(`profile_to_value`)}</h3>
-                    <p>${this.profile.value}</p>
+                    <p>${this.profile.randomIp ? `${chrome.i18n.getMessage("profile_random_ip_display")}` : this.profile.value}</p>
                     ${this.profile.domains.length ?
                         html`
                             <h3>${chrome.i18n.getMessage(`profile_for_domains_${this.profile.includeDomains ? "included" : "excluded"}`)}</h3>
@@ -147,7 +147,7 @@ export class ProfileElement extends LitElement {
                     `}
                 </footer>
             </section>
-            ${this.editing ? html`<profile-form .profileId=${this.profile.id} .name=${this.profile.name} .value=${this.profile.value} .headers=${this.profile.headers} .domains=${this.profile.domains} .includeDomains=${this.profile.includeDomains} @closeModal=${this._toggleModal}></profile-form>` : nothing }
+            ${this.editing ? html`<profile-form .profileId=${this.profile.id} .name=${this.profile.name} .value=${this.profile.value} .headers=${this.profile.headers} .domains=${this.profile.domains} .includeDomains=${this.profile.includeDomains} .randomIp=${this.profile.randomIp} @closeModal=${this._toggleModal}></profile-form>` : nothing }
         `
     }
 

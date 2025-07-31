@@ -13,9 +13,9 @@ export class ProfileFormElement extends LitElement {
             bottom: 0;
             left: 0;
             box-sizing: border-box;
-            
+
             background: rgba(0, 0, 0, 0.75);
-            
+
             display: flex;
             padding: 1rem;
             justify-content: center;
@@ -54,7 +54,7 @@ export class ProfileFormElement extends LitElement {
         .form-row {
             display: flex;
             flex-direction: column;
-            margin-bottom: 1rem;            
+            margin-bottom: 1rem;
         }
         .help-text,
         .error-text {
@@ -73,6 +73,67 @@ export class ProfileFormElement extends LitElement {
             flex-direction: row;
             justify-content: space-between;
         }
+        .input-with-switch {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .input-with-switch input[type="text"] {
+            flex: 1;
+        }
+
+        /* 椭圆形开关样式 */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: var(--color-primary-500);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
     `;
 
     @property()
@@ -83,6 +144,10 @@ export class ProfileFormElement extends LitElement {
 
     @property()
     value: string = "";
+
+    @property({ type: Boolean })
+    randomIp: boolean = false;
+
 
     protected _headers: string[] = [];
     @property()
@@ -141,9 +206,25 @@ export class ProfileFormElement extends LitElement {
                     </div>
                     <div class="form-row ${this._errors.value ? "form-error" : ""}">
                         <label for="value">${chrome.i18n.getMessage("form_value_label")}</label>
-                        <input .value="${this.value}" @change=${this._handleInput} id="value" placeholder="127.0.0.1" type="text" class="${this._errors.value ? "form-error" : ""}" required>
+                        <div class="input-with-switch">
+                            <input .value="${this.randomIp ? '' : this.value}"
+                                   @change=${this._handleInput}
+                                   id="value"
+                                   placeholder="127.0.0.1"
+                                   type="text"
+                                   class="${this._errors.value ? "form-error" : ""}"
+                                   ?disabled=${this.randomIp}
+                                   ?required=${!this.randomIp}>
+                            <label class="switch">
+                                <input type="checkbox" 
+                                       .checked=${this.randomIp}
+                                       @change=${this._handleRandomIpToggle}
+                                       id="randomIp">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
                         ${this._errors.value ? html`<span class="error-text">${this._errors.value}</span>` : nothing }
-                        <span class="help-text">${chrome.i18n.getMessage("form_value_help")}</span>
+                        <span class="help-text">${this.randomIp ? chrome.i18n.getMessage("form_random_ip_help") : chrome.i18n.getMessage("form_value_help")}</span>
                     </div>
                     <div class="form-row ${this._errors.headers ? "form-error" : ""}">
                         <label for="headers">${chrome.i18n.getMessage("form_headers_label")}</label>
@@ -173,15 +254,19 @@ export class ProfileFormElement extends LitElement {
                     </div>
                 </main>
                 <footer>
-                    <ext-button @click=${this._cancel} class="btn-outline btn-danger">Cancel</ext-button>
-                    <ext-button @click=${this._save} class="btn-success" type="submit">Save</ext-button>
+                    <ext-button @click=${this._cancel} class="btn-outline btn-danger">${chrome.i18n.getMessage("btn_cancel_2")}</ext-button>
+                    <ext-button @click=${this._save} class="btn-success" type="submit">${chrome.i18n.getMessage("btn_save")}</ext-button>
                 </footer>
             </section>
         `
     }
     protected _handleInput(event: InputEvent) {
-        let { id , value , required} = event.target as HTMLInputElement;
-        if(id === "headers") {
+        const target = event.target as HTMLInputElement;
+        let { id, value, required, checked } = target;
+
+        if (id === "randomIp") {
+            this.randomIp = checked;
+        } else if(id === "headers") {
             this.headers = Array.from((event.target as HTMLSelectElement).selectedOptions, option => option.value);
         } else if(["name", "value", "domains"].includes(id)) {
             this[id] = value.trim();
@@ -191,7 +276,7 @@ export class ProfileFormElement extends LitElement {
             this.includeDomains = (value === "true");
         }
 
-        if(required) {
+        if(required && !this.randomIp) {
             const errors = Object.assign({}, this._errors);
             if(value) {
                 if(errors[id]) { delete errors[id] }
@@ -199,6 +284,20 @@ export class ProfileFormElement extends LitElement {
                 if(!errors[id]) { errors[id] = chrome.i18n.getMessage(`error_${id}_required`); }
             }
             this._errors = errors;
+        }
+    }
+    protected _handleRandomIpToggle(event: Event) {
+        const target = event.target as HTMLInputElement;
+        this.randomIp = target.checked;
+
+        if (this.randomIp) {
+            // Clear input box and validation errors when enabling random IP
+            this.value = "";
+            const errors = Object.assign({}, this._errors);
+            if (errors.value) {
+                delete errors.value;
+                this._errors = errors;
+            }
         }
     }
 
@@ -213,16 +312,17 @@ export class ProfileFormElement extends LitElement {
 
         const profile : Partial<Profile> = {
             name: this.name,
-            value: this.value,
+            value: this.randomIp ? "" : this.value,
             headers: this.headers,
             // @ts-ignore
             includeDomains: this.includeDomains,
             domains: this.domains,
+            randomIp: this.randomIp,
         }
 
         let errors: { [key: string]: string } = {};
 
-        const required = ["name", "value", "headers"];
+        const required = this.randomIp ? ["name", "headers"] : ["name", "value", "headers"];
         required.forEach((field) => {
             if(!profile[field] || !profile[field].length) {
                 errors[field] = chrome.i18n.getMessage(`error_${field}_required`);
