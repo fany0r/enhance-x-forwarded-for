@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "__buildName__",
-  "description": "This extension allows you quickly to set the X-Forwarded-For HTTP Header",
+  "description": "__MSG_extDescription__",
   "author": "Philip Lawrence, Modified by fany0r",
   "version": "__buildVersion__",
   "background": {

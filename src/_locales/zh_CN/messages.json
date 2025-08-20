@@ -54,6 +54,12 @@
   "btn_copy_debug": {
     "message": "复制调试信息"
   },
+  "extName": {
+    "message": "X-Forwarded-For Header"
+  },
+  "extDescription": {
+    "message": "此扩展可以快速设置 X-Forwarded-For HTTP 请求头"
+  },
   "error_domains_required": {
     "message": "至少需要指定一个域名"
   },
