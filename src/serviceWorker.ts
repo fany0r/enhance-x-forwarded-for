@@ -1,5 +1,10 @@
 import ResourceType = chrome.declarativeNetRequest.ResourceType;
 
+// 添加占位符类型声明
+declare const __RESOURCE_TYPES__: ResourceType[];
+declare const __RULE_ACTION_TYPE_MODIFY_HEADERS__: any;
+declare const __HEADER_OPERATION_SET__: any;
+
 interface Profile {
     id: number;
     name: string;
@@ -28,34 +33,17 @@ const convertProfileToRule = (profile: Profile): chrome.declarativeNetRequest.Ru
         id: profile.id,
         priority: profile.id,
         action: {
-            type: chrome.declarativeNetRequest.RuleActionType.MODIFY_HEADERS,
+            type: __RULE_ACTION_TYPE_MODIFY_HEADERS__ as any,
             requestHeaders: profile.headers.map((header) => {
                 return {
                     header: header.toLowerCase(),
-                    operation: chrome.declarativeNetRequest.HeaderOperation.SET,
+                    operation: __HEADER_OPERATION_SET__ as any,
                     value: ipValue,
                 }
             }),
         },
         condition: {
-            resourceTypes: [
-                ResourceType.MAIN_FRAME,
-                ResourceType.SUB_FRAME,
-                ResourceType.STYLESHEET,
-                ResourceType.SCRIPT,
-                ResourceType.IMAGE,
-                ResourceType.FONT,
-                ResourceType.OBJECT,
-                ResourceType.XMLHTTPREQUEST,
-                ResourceType.PING,
-                ResourceType.CSP_REPORT,
-                ResourceType.MEDIA,
-                ResourceType.WEBSOCKET,
-                ResourceType.OTHER,
-                ResourceType.MEDIA,
-                "webtransport" as ResourceType,
-                "webbundle" as ResourceType
-            ],
+            resourceTypes: __RESOURCE_TYPES__ as any,
         },
     };
 

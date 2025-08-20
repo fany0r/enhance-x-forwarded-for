@@ -20,6 +20,52 @@ const configs = [];
 
 platforms.forEach((platformName) => {
     const dest = `builds/${platformName}`;
+
+    // 根据平台设置不同的 API 值
+    const chromeResourceTypes = `[
+        ResourceType.MAIN_FRAME,
+        ResourceType.SUB_FRAME,
+        ResourceType.STYLESHEET,
+        ResourceType.SCRIPT,
+        ResourceType.IMAGE,
+        ResourceType.FONT,
+        ResourceType.OBJECT,
+        ResourceType.XMLHTTPREQUEST,
+        ResourceType.PING,
+        ResourceType.CSP_REPORT,
+        ResourceType.MEDIA,
+        ResourceType.WEBSOCKET,
+        ResourceType.OTHER,
+        "webtransport",
+        "webbundle"
+    ]`;
+
+    const firefoxResourceTypes = `[
+        ResourceType.MAIN_FRAME,
+        ResourceType.SUB_FRAME,
+        ResourceType.STYLESHEET,
+        ResourceType.SCRIPT,
+        ResourceType.IMAGE,
+        ResourceType.FONT,
+        ResourceType.OBJECT,
+        ResourceType.XMLHTTPREQUEST,
+        ResourceType.PING,
+        ResourceType.CSP_REPORT,
+        ResourceType.MEDIA,
+        ResourceType.WEBSOCKET,
+        ResourceType.OTHER
+    ]`;
+
+    const apiValues = platformName === 'firefox' ? {
+        '__RULE_ACTION_TYPE_MODIFY_HEADERS__': '"modifyHeaders"',
+        '__HEADER_OPERATION_SET__': '"set"',
+        '__RESOURCE_TYPES__': firefoxResourceTypes
+    } : {
+        '__RULE_ACTION_TYPE_MODIFY_HEADERS__': 'chrome.declarativeNetRequest.RuleActionType.MODIFY_HEADERS',
+        '__HEADER_OPERATION_SET__': 'chrome.declarativeNetRequest.HeaderOperation.SET',
+        '__RESOURCE_TYPES__': chromeResourceTypes
+    };
+
     configs.push(
         {
             input: "./src/serviceWorker.ts",
@@ -34,6 +80,7 @@ platforms.forEach((platformName) => {
                         '__buildVersion__': packageJson.version,
                         '__buildName__': extensionName,
                         'process.env.NODE_ENV': extensionEnv,
+                        ...apiValues
                     },
                     preventAssignment: true,
                 }),
@@ -51,6 +98,7 @@ platforms.forEach((platformName) => {
                             transform: (contents) => {
                                 return contents.toString()
                                     .replace(/__buildVersion__/g, packageJson.version)
+                                    .replace(/__homePage__/g, packageJson.homepage)
                                     .replace(/__buildName__/g, extensionName)
                             }
                         },
@@ -78,6 +126,7 @@ platforms.forEach((platformName) => {
                     values: {
                         '__buildVersion__': packageJson.version,
                         'process.env.NODE_ENV': extensionEnv,
+                        ...apiValues
                     },
                     preventAssignment: true,
                 }),
@@ -97,4 +146,5 @@ platforms.forEach((platformName) => {
         }
     );
 });
+
 export default configs;

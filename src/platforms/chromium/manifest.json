@@ -23,6 +23,7 @@
     "64": "assets/logo-64.png",
     "128": "assets/logo-128.png"
   },
+  "homepage_url": "__homePage__",
   "permissions": [
     "storage",
     "declarativeNetRequestWithHostAccess"
