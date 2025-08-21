@@ -14,7 +14,7 @@ Chrome [releases](https://github.com/fany0r/enhance-x-forwarded-for/releases)
 
 Microsoft Edge [this](https://microsoftedge.microsoft.com/addons/detail/xforwardedfor-header/fjjjpjleokdnichiamombahbepijjbhf) 
 
-Firefox： The current version does not support, please use an [older](https://addons.mozilla.org/firefox/addon/x-forwarded-for-injector/) version.
+Firefox [this](https://addons.mozilla.org/firefox/addon/x-forwarded-for-header-injecto/)
 
 ### Local Build
 
