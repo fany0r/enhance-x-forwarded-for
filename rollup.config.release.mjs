@@ -2,7 +2,7 @@ import typescript from "@rollup/plugin-typescript";
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import url from '@rollup/plugin-url';
-import ZipPack from 'unplugin-zip-pack/rollup'
+import archiver from 'archiver';
 
 import { rollupPluginHTML as html } from '@web/rollup-plugin-html';
 import copy from "rollup-plugin-copy";
@@ -18,6 +18,25 @@ const extensionEnv = `"production"`;
 const extensionName = "X-Forwarded-For Header";
 
 const configs = [];
+
+function createZipPlugin(options) {
+    return {
+        name: 'create-zip',
+        writeBundle() {
+            return new Promise((resolve, reject) => {
+                const output = fs.createWriteStream(options.out);
+                const archive = archiver('zip', { zlib: { level: 9 } });
+
+                output.on('close', resolve);
+                archive.on('error', reject);
+
+                archive.pipe(output);
+                archive.directory(options.in, false);
+                archive.finalize();
+            });
+        }
+    };
+}
 
 platforms.forEach((platformName) => {
     const dest = `releases/${platformName}`;
@@ -139,7 +158,7 @@ platforms.forEach((platformName) => {
                         }
                     ]
                 }),
-                ZipPack({
+                createZipPlugin({
                     in: dest,
                     out: `releases/${platformName}-${packageJson.version}.zip`,
                 }),
