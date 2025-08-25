@@ -10,11 +10,11 @@
 
 ### Get it
 
-Chrome [releases](https://github.com/fany0r/enhance-x-forwarded-for/releases)
+[Chrome Web Store](https://chromewebstore.google.com/detail/ldbhjepolchmomampnbbopphnalgggaj)
 
-Microsoft Edge [this](https://microsoftedge.microsoft.com/addons/detail/xforwardedfor-header/fjjjpjleokdnichiamombahbepijjbhf) 
+[Microsoft Edge Addons](https://microsoftedge.microsoft.com/addons/detail/fjjjpjleokdnichiamombahbepijjbhf) 
 
-Firefox [this](https://addons.mozilla.org/firefox/addon/x-forwarded-for-header-injecto/)
+[Firefox Addons](https://addons.mozilla.org/firefox/addon/x-forwarded-for-header-injecto/)
 
 ### Local Build
 
